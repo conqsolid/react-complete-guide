@@ -59,18 +59,12 @@ class App extends Component {
 
   render() {
 
-    const buttonStyle = {
-      backgroundColor: 'white',
-      font: 'inherit',
-      border: "1px solid blue",
-      padding: '8px',
-      cursor: 'pointer'
-    }
-
     const showPersons = this.state.showPersons;
 
     let persons = [];
     const assignedClasses = [];
+
+    let buttonClass = '';
 
     if (showPersons) {
       persons = (
@@ -89,8 +83,8 @@ class App extends Component {
         })
       );
 
-      buttonStyle.backgroundColor = "red";
-
+      //css loader also work on pseudo selectors
+      buttonClass = cssClasses.Red;
     }
 
     if (this.state.persons.length <= 2) {
@@ -106,7 +100,7 @@ class App extends Component {
         <div className={cssClasses.App}>
           <h1>Hello I'm a React App</h1>
           <p className={assignedClasses.join(" ")}>This really works.</p>
-          <button style={buttonStyle} onClick={this.togglePersons}>Toggle Persons</button>
+          <button className={buttonClass} onClick={this.togglePersons}>Toggle Persons</button>
           {persons}
         </div>
     );
