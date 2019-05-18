@@ -70,7 +70,7 @@ class App extends Component {
                 <Person
                   key={person.id}
                   change={this.inputChangeHandler}
-                  click={this.deletePersonHandler.bind(this, index)}
+                  clickDelete={this.deletePersonHandler.bind(this, index)}
                   name={person.name}
                   age={person.age}
                 >
