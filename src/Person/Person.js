@@ -1,6 +1,8 @@
 import React from 'react';
 import cssClasses from './Person.css';
 
+//css classes also work with media queries
+
 const person = (props) => {
     return (
         <div className={cssClasses.Person}>
