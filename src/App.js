@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import cssClasses from './App.css';
 import Person from './Person/Person';
-import Radium, { StyleRoot } from 'radium';
 
 class App extends Component {
 
@@ -65,16 +64,13 @@ class App extends Component {
       font: 'inherit',
       border: "1px solid blue",
       padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'blue'
-      }
+      cursor: 'pointer'
     }
 
     const showPersons = this.state.showPersons;
 
     let persons = [];
-    const paragraphClasses = [];
+    const assignedClasses = [];
 
     if (showPersons) {
       persons = (
@@ -98,23 +94,21 @@ class App extends Component {
     }
 
     if (this.state.persons.length <= 2) {
-      paragraphClasses.push('red');
+      assignedClasses.push(cssClasses.red);
     }
 
     if (this.state.persons.length <= 1) {
-      paragraphClasses.push('bold');
+      assignedClasses.push(cssClasses.bold);
     }
 
     //With jsx
     return (
-      <StyleRoot>
-        <div className="App">
+        <div className={cssClasses.App}>
           <h1>Hello I'm a React App</h1>
-          <p className={paragraphClasses.join(" ")}>This really works.</p>
+          <p className={assignedClasses.join(" ")}>This really works.</p>
           <button style={buttonStyle} onClick={this.togglePersons}>Toggle Persons</button>
           {persons}
         </div>
-      </StyleRoot>
     );
 
     //Wihhout jsx
@@ -122,4 +116,4 @@ class App extends Component {
   }
 }
 
-export default Radium(App);
+export default App;
