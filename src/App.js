@@ -46,17 +46,26 @@ class App extends Component {
   }
   render() {
 
+    const buttonStyle = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: "1px solid blue",
+      padding: '8px',
+      cursor: 'pointer'
+
+    }
+
     //With jsx
     return (
       <div className="App">
         <h1>Hello I'm a React App</h1>
         <p>This really works.</p>
-        <button onClick={this.buttonClickHandler}>Switch Name to Fatih</button>
+        <button style={buttonStyle} onClick={this.buttonClickHandler}>Switch Name to Fatih</button>
         {this.state.persons.map((person, index) => {
           return (<Person key={index} change={this.inputChangeHandler} click={this.switchNameHandler.bind(this, index, "Fth")} name={person.name} age={person.age}>
-          
-          {index}
-          
+
+            {index}
+
           </Person>)
         })}
       </div>
