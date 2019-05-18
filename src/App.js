@@ -8,6 +8,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      showPersons: true,
       persons: [
         {
           name: "Max",
@@ -25,10 +26,11 @@ class App extends Component {
     }
   }
 
-  buttonClickHandler = () => {
-    console.log("Was clicked");
-    console.log(this);
-    this.switchNameHandler(0);
+  togglePersons = () => {
+    const showPersons = this.state.showPersons;
+    this.setState({
+      showPersons: !showPersons
+    });
   }
 
   inputChangeHandler = (event) => {
@@ -60,14 +62,18 @@ class App extends Component {
       <div className="App">
         <h1>Hello I'm a React App</h1>
         <p>This really works.</p>
-        <button style={buttonStyle} onClick={this.buttonClickHandler}>Switch Name to Fatih</button>
-        {this.state.persons.map((person, index) => {
-          return (<Person key={index} change={this.inputChangeHandler} click={this.switchNameHandler.bind(this, index, "Fth")} name={person.name} age={person.age}>
+        <button style={buttonStyle} onClick={this.togglePersons}>Switch Name to Fatih</button>
+        {
+          this.state.showPersons ?
+            this.state.persons.map((person, index) => {
+              return (<Person key={index} change={this.inputChangeHandler} click={this.switchNameHandler.bind(this, index, "Fth")} name={person.name} age={person.age}>
 
-            {index}
+                {index}
 
-          </Person>)
-        })}
+              </Person>)
+            })
+            : null
+        }
       </div>
     );
 
