@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Person from './Person/Person';
+import Radium, { StyleRoot } from 'radium';
 
 class App extends Component {
 
@@ -10,9 +11,9 @@ class App extends Component {
     this.state = {
       showPersons: false,
       persons: [
-        { id: "1ryvs", name: "Max", age: 28 },
-        { id: "3euqo", name: "Manu", age: 29 },
-        { id: "5gi53", name: "Stephanie", age: 30 }
+        { id: Math.floor(Math.random() * 1000), name: "Max", age: 28 },
+        { id: Math.floor(Math.random() * 1000), name: "Manu", age: 29 },
+        { id: Math.floor(Math.random() * 1000), name: "Stephanie", age: 30 }
       ]
     }
   }
@@ -25,12 +26,12 @@ class App extends Component {
   }
 
   inputChangeHandler = (event, id) => {
-    
+
     const persons = [...this.state.persons];
     const personIndex = persons.findIndex((item) => {
       return item.id === id;
     });
-  
+
     const person = {
       ...persons[personIndex]
     }
@@ -46,10 +47,10 @@ class App extends Component {
 
   deletePersonHandler = (id) => {
     const persons = [...this.state.persons];
-    const personIndex = this.state.persons.findIndex( (person) =>{
+    const personIndex = this.state.persons.findIndex((person) => {
       return person.id === id;
     });
-    
+
     persons.splice(personIndex, 1);
 
     this.setState({
@@ -64,34 +65,56 @@ class App extends Component {
       font: 'inherit',
       border: "1px solid blue",
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'blue'
+      }
+    }
 
+    const showPersons = this.state.showPersons;
+
+    let persons = [];
+    const paragraphClasses = [];
+
+    if (showPersons) {
+      persons = (
+        this.state.persons.map((person, index) => {
+          return (
+            <Person
+              key={person.id}
+              change={(event) => this.inputChangeHandler(event, person.id)}
+              clickDelete={this.deletePersonHandler.bind(this, person.id)}
+              name={person.name}
+              age={person.age}
+            >
+              {person.id}
+            </Person>
+          )
+        })
+      );
+
+      buttonStyle.backgroundColor = "red";
+
+    }
+
+    if (this.state.persons.length <= 2) {
+      paragraphClasses.push('red');
+    }
+
+    if (this.state.persons.length <= 1) {
+      paragraphClasses.push('bold');
     }
 
     //With jsx
     return (
-      <div className="App">
-        <h1>Hello I'm a React App</h1>
-        <p>This really works.</p>
-        <button style={buttonStyle} onClick={this.togglePersons}>Toggle Persons</button>
-        {
-          this.state.showPersons ?
-            this.state.persons.map((person, index) => {
-              return (
-                <Person
-                  key={person.id}
-                  change={(event) => this.inputChangeHandler(event, person.id)}
-                  clickDelete={this.deletePersonHandler.bind(this, person.id)}
-                  name={person.name}
-                  age={person.age}
-                >
-                  {person.id}
-                </Person>
-              )
-            })
-            : null
-        }
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <h1>Hello I'm a React App</h1>
+          <p className={paragraphClasses.join(" ")}>This really works.</p>
+          <button style={buttonStyle} onClick={this.togglePersons}>Toggle Persons</button>
+          {persons}
+        </div>
+      </StyleRoot>
     );
 
     //Wihhout jsx
@@ -99,4 +122,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
