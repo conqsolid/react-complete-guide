@@ -10,9 +10,9 @@ class App extends Component {
     this.state = {
       showPersons: false,
       persons: [
-        { id: '0', name: "Max", age: 28 },
-        { id: '1', name: "Manu", age: 29 },
-        { id: '2', name: "Stephanie", age: 30 }
+        { id: "1ryvs", name: "Max", age: 28 },
+        { id: "3euqo", name: "Manu", age: 29 },
+        { id: "5gi53", name: "Stephanie", age: 30 }
       ]
     }
   }
@@ -24,23 +24,34 @@ class App extends Component {
     });
   }
 
-  inputChangeHandler = (event) => {
-    this.state.persons.forEach((person, index) => {
-      this.switchNameHandler(index, event.target.value);
-    })
-  }
+  inputChangeHandler = (event, id) => {
+    
+    const persons = [...this.state.persons];
+    const personIndex = persons.findIndex((item) => {
+      return item.id === id;
+    });
+  
+    const person = {
+      ...persons[personIndex]
+    }
 
-  switchNameHandler = (index, name) => {
-    var persons = this.state.persons;
-    persons[index].name = name;
+    person.name = event.target.value;
+
+    persons[personIndex] = person;
+
     this.setState({
       persons: persons
     });
   }
 
-  deletePersonHandler = (index) => {
+  deletePersonHandler = (id) => {
     const persons = [...this.state.persons];
-    persons.splice(index, 1);
+    const personIndex = this.state.persons.findIndex( (person) =>{
+      return person.id === id;
+    });
+    
+    persons.splice(personIndex, 1);
+
     this.setState({
       persons: persons
     });
@@ -69,12 +80,12 @@ class App extends Component {
               return (
                 <Person
                   key={person.id}
-                  change={this.inputChangeHandler}
-                  clickDelete={this.deletePersonHandler.bind(this, index)}
+                  change={(event) => this.inputChangeHandler(event, person.id)}
+                  clickDelete={this.deletePersonHandler.bind(this, person.id)}
                   name={person.name}
                   age={person.age}
                 >
-                  {index}
+                  {person.id}
                 </Person>
               )
             })
