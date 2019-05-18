@@ -10,9 +10,9 @@ class App extends Component {
     this.state = {
       showPersons: false,
       persons: [
-        { name: "Max", age: 28 },
-        { name: "Manu", age: 29 },
-        { name: "Stephanie", age: 30 }
+        { id: '0', name: "Max", age: 28 },
+        { id: '1', name: "Manu", age: 29 },
+        { id: '2', name: "Stephanie", age: 30 }
       ]
     }
   }
@@ -66,11 +66,17 @@ class App extends Component {
         {
           this.state.showPersons ?
             this.state.persons.map((person, index) => {
-              return (<Person key={index} change={this.inputChangeHandler} click={this.deletePersonHandler.bind(this, index)} name={person.name} age={person.age}>
-
-                {index}
-
-              </Person>)
+              return (
+                <Person
+                  key={person.id}
+                  change={this.inputChangeHandler}
+                  click={this.deletePersonHandler.bind(this, index)}
+                  name={person.name}
+                  age={person.age}
+                >
+                  {index}
+                </Person>
+              )
             })
             : null
         }
