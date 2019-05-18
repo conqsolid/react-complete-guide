@@ -46,6 +46,15 @@ class App extends Component {
       persons: persons
     });
   }
+
+  deletePersonHandler = (index) => {
+    const persons = this.state.persons;
+    persons.splice(index, 1);
+    this.setState({
+      persons: persons
+    });
+  }
+
   render() {
 
     const buttonStyle = {
@@ -66,7 +75,7 @@ class App extends Component {
         {
           this.state.showPersons ?
             this.state.persons.map((person, index) => {
-              return (<Person key={index} change={this.inputChangeHandler} click={this.switchNameHandler.bind(this, index, "Fth")} name={person.name} age={person.age}>
+              return (<Person key={index} change={this.inputChangeHandler} click={this.deletePersonHandler.bind(this, index)} name={person.name} age={person.age}>
 
                 {index}
 
