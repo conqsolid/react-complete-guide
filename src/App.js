@@ -4,6 +4,46 @@ import './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      persons: [
+        {
+          name: "Max",
+          age: 28
+        },
+        {
+          name: "Manu",
+          age: 29
+        },
+        {
+          name: "Stephanie",
+          age: 30
+        }
+      ]
+    }
+  }
+
+  buttonClickHandler = () => {
+    console.log("Was clicked");
+    console.log(this);
+    this.switchNameHandler(0);
+  }
+
+  inputChangeHandler = (event) => {
+    this.state.persons.forEach((person, index) => {
+      this.switchNameHandler(index, event.target.value);
+    })
+  }
+
+  switchNameHandler = (index, name) => {
+    var persons = this.state.persons;
+    persons[index].name = name;
+    this.setState({
+      persons: persons
+    });
+  }
   render() {
 
     //With jsx
@@ -11,9 +51,14 @@ class App extends Component {
       <div className="App">
         <h1>Hello I'm a React App</h1>
         <p>This really works.</p>
-        <Person name="Max" age="28" />
-        <Person name="Manu" age ="29">My Hobbies: Racing</Person>
-        <Person name="Stephanie" age="30"/>
+        <button onClick={this.buttonClickHandler}>Switch Name to Fatih</button>
+        {this.state.persons.map((person, index) => {
+          return (<Person key={index} change={this.inputChangeHandler} click={this.switchNameHandler.bind(this, index, "Fth")} name={person.name} age={person.age}>
+          
+          {index}
+          
+          </Person>)
+        })}
       </div>
     );
 
