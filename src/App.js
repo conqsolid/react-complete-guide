@@ -8,20 +8,11 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showPersons: true,
+      showPersons: false,
       persons: [
-        {
-          name: "Max",
-          age: 28
-        },
-        {
-          name: "Manu",
-          age: 29
-        },
-        {
-          name: "Stephanie",
-          age: 30
-        }
+        { name: "Max", age: 28 },
+        { name: "Manu", age: 29 },
+        { name: "Stephanie", age: 30 }
       ]
     }
   }
@@ -71,7 +62,7 @@ class App extends Component {
       <div className="App">
         <h1>Hello I'm a React App</h1>
         <p>This really works.</p>
-        <button style={buttonStyle} onClick={this.togglePersons}>Switch Name to Fatih</button>
+        <button style={buttonStyle} onClick={this.togglePersons}>Toggle Persons</button>
         {
           this.state.showPersons ?
             this.state.persons.map((person, index) => {
