@@ -8,7 +8,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showPersons: false,
+      showPersons: true,
       persons: [
         { id: Math.floor(Math.random() * 1000), name: "Max", age: 28 },
         { id: Math.floor(Math.random() * 1000), name: "Manu", age: 29 },
