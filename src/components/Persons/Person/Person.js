@@ -4,6 +4,7 @@ import cssClasses from './Person.css';
 //css classes also work with media queries
 
 const person = (props) => {
+    console.log("[Person.js] rendering...");
     return (
         <div className={cssClasses.Person}>
             <p className="deneme">I'm {props.name} and I'm at {props.age} years old.</p>

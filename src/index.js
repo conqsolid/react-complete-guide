@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
-import Practice from './Practice';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App appTitle="Person Manager"/>, document.getElementById('root'));
 registerServiceWorker();

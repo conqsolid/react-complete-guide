@@ -6,14 +6,24 @@ class App extends Component {
 
   constructor(props) {
     super(props);
+    console.log("[App.js] construct");
     this.state = {
-      showPersons: true,
+      showPersons: false,
       persons: [
         { id: Math.floor(Math.random() * 1000), name: "Max", age: 28 },
         { id: Math.floor(Math.random() * 1000), name: "Manu", age: 29 },
         { id: Math.floor(Math.random() * 1000), name: "Stephanie", age: 30 }
       ]
     }
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log("[App.js getDerivedStateFromProps]", props);
+    return state;
+  }
+
+  componentDidMount() {
+      console.log("[App.js] componentDidMount");
   }
 
   togglePersons = () => {
@@ -57,7 +67,7 @@ class App extends Component {
   }
 
   render() {
-
+    console.log("[App.js] rendering...");
     const showPersons = this.state.showPersons;
 
     let persons = [];
