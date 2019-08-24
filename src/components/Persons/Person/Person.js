@@ -3,6 +3,7 @@ import cssClasses from './Person.css';
 
 //css classes also work with media queries
 
+<<<<<<< HEAD
 class Person extends Component {
     constructor(props) {
         super(props);
