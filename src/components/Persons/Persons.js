@@ -1,46 +1,23 @@
 import React, { Component } from 'react';
-import Person from './Person/Person';
+import cssClasses from '../Persons/Person/Person.css';
 
-<<<<<<< HEAD
-class Persons extends Component {
+//css classes also work with media queries
 
+class Person extends Component {
     constructor(props) {
         super(props);
     }
 
     render() {
-        console.log("[Persons.js] rendering...");
+        console.log("[Person.js] rendering...");
         return (
-            this.props.persons.map((person, index) => {
-                return (
-                    <Person
-                        key={person.id}
-                        change={(event) => this.props.changed(event, person.id)}
-                        clickDelete={this.props.clickedDelete.bind(this, person.id)}
-                        name={person.name}
-                        age={person.age}
-                    >
-                        {person.id}
-                    </Person>
-                )
-            }
-=======
-const Persons = (props) => {
-    return (
-        props.persons.map((person, index) => {
-            return (
-                <Person
-                    key={person.id}
-                    change={(event) => props.changed(event, person.id)}
-                    clickDelete={props.clickedDelete.bind(this, person.id)}
-                    name={person.name}
-                    age={person.age}
-                >
-                    {person.id}
-                </Person>
->>>>>>> parent of ada3f88... Component lifecycle methods
-            )
-        )
+            <div className={cssClasses.Person}>
+                <p className="deneme">I'm {this.props.name} and I'm at {this.props.age} years old.</p>
+                <p>{this.props.children}</p>
+                <input type="text" onChange={this.props.change} value={this.props.name} />
+                <button onClick={this.props.clickDelete}>Delete Object</button>
+            </div>)
     }
-}
-export default Persons;
+};
+
+export default Person;
