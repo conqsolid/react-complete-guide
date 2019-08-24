@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
+import React,{Component} from 'react';
 import cssClasses from './Person.css';
-
-//css classes also work with media queries
 
 class Person extends Component {
     constructor(props) {
@@ -18,5 +16,6 @@ class Person extends Component {
                 <button onClick={this.props.clickDelete}>Delete Object</button>
             </div>)
     }
-}
+};
+
 export default Person;
